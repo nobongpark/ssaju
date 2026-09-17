@@ -1,0 +1,641 @@
+<title>인연다원</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400&family=Noto+Sans+KR:wght@400&family=EB+Garamond:ital@0;1&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+<style>
+  :root {
+    --bg: #f3eee7;
+    --surface: #fdf9f5;
+    --surface-2: #f7f1e8;
+    --ink: #313131;
+    --ink-soft: #6f665c;
+    --border: rgba(49,49,49,0.16);
+    --thread: #ac3b2a;
+    --thread-soft: rgba(172,59,42,0.12);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #221e1a;
+      --surface: #2b2621;
+      --surface-2: #322c26;
+      --ink: #f0e9df;
+      --ink-soft: #bcafa0;
+      --border: rgba(240,233,223,0.16);
+      --thread: #d1684f;
+      --thread-soft: rgba(209,104,79,0.16);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #221e1a;
+    --surface: #2b2621;
+    --surface-2: #322c26;
+    --ink: #f0e9df;
+    --ink-soft: #bcafa0;
+    --border: rgba(240,233,223,0.16);
+    --thread: #d1684f;
+    --thread-soft: rgba(209,104,79,0.16);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Serif KR", "Times New Roman", serif;
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+  }
+  h1, h2, h3 {
+    font-family: "Noto Serif KR", "Times New Roman", serif;
+    font-weight: 400;
+    line-height: 1.45;
+    margin: 0;
+    text-wrap: balance;
+  }
+  p { margin: 0; }
+  a { color: inherit; }
+
+  .overline {
+    display: inline-block;
+    font-family: "EB Garamond", "Times New Roman", serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+    color: var(--thread);
+  }
+
+  /* ---- header ---- */
+  header.site {
+    text-align: center;
+    padding: 40px 24px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  header.site .wordmark { font-size: 1.5rem; margin-top: 8px; }
+  header.site .sub { margin-top: 6px; font-size: 0.82rem; color: var(--ink-soft); letter-spacing: 0.05em; }
+
+  /* ---- hero ---- */
+  .hero { max-width: 640px; margin: 0 auto; padding: 64px 24px 24px; text-align: center; }
+  .hero h1 { font-size: clamp(1.6rem, 4vw, 2.15rem); letter-spacing: 0.01em; }
+  .hero .sub {
+    margin: 20px auto 0;
+    max-width: 46ch;
+    font-size: 1rem;
+    color: var(--ink-soft);
+  }
+
+  .thread-art { width: min(360px, 80%); margin: 44px auto; display: block; }
+  .thread-line { stroke: var(--thread); stroke-width: 1.5; fill: none; }
+  .seal-ring { fill: var(--surface); stroke: var(--ink); stroke-width: 1.3; }
+  .seal-glyph { fill: var(--thread); font-family: "Noto Serif KR", serif; font-size: 25px; }
+  .thread-knot { fill: var(--thread); }
+
+  .btn {
+    display: inline-block;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 400;
+    font-size: 0.92rem;
+    letter-spacing: 0.06em;
+    padding: 14px 32px;
+    background: var(--ink);
+    color: var(--bg);
+    border: 1px solid var(--ink);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .btn:hover { opacity: 0.86; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+
+  /* ---- content ---- */
+  .content { max-width: 720px; margin: 0 auto; padding: 8px 24px 88px; }
+
+  section.block { margin-top: 72px; }
+  section.block:first-child { margin-top: 48px; }
+  section.block > .overline { display: block; margin-bottom: 10px; }
+  section.block h2 { font-size: 1.4rem; margin-bottom: 8px; }
+  section.block .lede { color: var(--ink-soft); font-size: 0.92rem; margin-bottom: 32px; max-width: 56ch; }
+
+  /* ---- form ---- */
+  .persons { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+  .person {
+    border-top: 1px solid var(--border);
+    padding-top: 18px;
+  }
+  .person .person-label { font-size: 1.05rem; margin-bottom: 18px; }
+  .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+  .field label {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.03em;
+  }
+  input[type="date"], input[type="time"], input[type="text"], select {
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 400;
+    font-size: 0.92rem;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    padding: 10px 12px;
+    accent-color: var(--thread);
+  }
+  input:focus-visible, select:focus-visible, .btn:focus-visible, button:focus-visible, .toggle summary:focus-visible {
+    outline: 1.5px solid var(--thread);
+    outline-offset: 2px;
+  }
+  .radio-row, .check-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .radio-row label, .check-row label {
+    font-family: "Noto Sans KR", sans-serif;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.88rem; color: var(--ink);
+    letter-spacing: 0;
+  }
+  input[type="radio"], input[type="checkbox"] { accent-color: var(--thread); width: 15px; height: 15px; }
+
+  .submit-row { margin-top: 8px; text-align: center; }
+  .submit-row .btn { width: 100%; max-width: 320px; }
+  .form-msg { display: block; margin-top: 12px; font-family: "Noto Sans KR", sans-serif; font-size: 0.82rem; color: var(--thread); min-height: 1.2em; }
+
+  /* ---- results ---- */
+  #results { display: none; }
+  #results.show { display: block; }
+
+  .prose p { font-size: 0.98rem; margin-bottom: 16px; }
+  .prose p:last-child { margin-bottom: 0; }
+
+  .profile-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; margin-top: 8px; }
+  .profile { border-top: 1px solid var(--border); padding-top: 16px; }
+  .profile h3 { font-size: 1.05rem; margin-bottom: 14px; }
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  .profile .spec-row:first-of-type { border-top: none; }
+  .spec-row dt { font-family: "Noto Sans KR", sans-serif; color: var(--ink-soft); font-size: 0.78rem; flex: 0 0 auto; }
+  .spec-row dd { margin: 0; text-align: right; }
+
+  .compat-card {
+    margin-top: 40px;
+    padding: 32px 0 4px;
+    border-top: 1px solid var(--thread-soft);
+    text-align: center;
+  }
+  .compat-badge {
+    display: inline-block;
+    font-family: "EB Garamond", serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    color: var(--thread);
+    margin-bottom: 14px;
+  }
+  .compat-card .prose { max-width: 54ch; margin: 0 auto; text-align: left; }
+  .compat-extra { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); }
+
+  details.toggle { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 16px; }
+  details.toggle summary {
+    cursor: pointer;
+    font-family: "Noto Sans KR", sans-serif;
+    color: var(--thread);
+    list-style: none;
+    font-size: 0.86rem;
+    letter-spacing: 0.03em;
+  }
+  details.toggle summary::-webkit-details-marker { display: none; }
+  details.toggle summary::before { content: "＋ "; }
+  details.toggle[open] summary::before { content: "－ "; }
+  .markdown-full {
+    margin-top: 18px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+  .markdown-full h2 { font-family: "Noto Serif KR", serif; font-size: 1rem; margin: 20px 0 8px; color: var(--ink); }
+  .markdown-full h2:first-child { margin-top: 0; }
+  .markdown-full table { border-collapse: collapse; width: 100%; margin: 8px 0 4px; font-size: 0.8rem; }
+  .markdown-full th, .markdown-full td { border: 1px solid var(--border); padding: 6px 8px; text-align: center; font-variant-numeric: tabular-nums; }
+  .markdown-full th { background: var(--surface-2); font-weight: 400; }
+  .markdown-full .table-scroll { overflow-x: auto; margin-bottom: 6px; }
+  .markdown-full code { background: var(--surface-2); padding: 1px 5px; }
+  .markdown-full p { margin: 4px 0; }
+
+  .again-row { margin-top: 48px; text-align: center; }
+  .again-row .btn-ghost {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 0.84rem;
+    padding: 10px 24px;
+  }
+
+  footer.site {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px 24px 56px;
+    border-top: 1px solid var(--border);
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+  footer.site a { text-decoration: underline; }
+
+  @media (max-width: 620px) {
+    .persons, .profile-pair { grid-template-columns: 1fr; gap: 32px; }
+    .person + .person, .profile + .profile { margin-top: 8px; }
+  }
+</style>
+
+<header class="site">
+  <span class="overline">IN-YEON TEA HOUSE</span>
+  <div class="wordmark">인연다원</div>
+  <div class="sub">두 사람의 사주를 하나의 이야기로 엮어 드립니다</div>
+</header>
+
+<div class="hero">
+  <span class="overline">A THREAD BETWEEN TWO NAMES</span>
+  <h1 style="margin-top:14px;">그대와 그 사람,<br>오행이 서로 얽히는 이야기.</h1>
+  <p class="sub">각자의 생년월일시를 넣으면 두 사람의 오행이 상생하는지, 상극으로 부딪히는지 조용히 풀어드립니다.</p>
+
+  <svg class="thread-art" viewBox="0 0 400 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="붉은 실로 이어진 인(因)과 연(緣) 두 개의 도장 문양">
+    <path class="thread-line" d="M97 62 C 155 100, 245 100, 303 62"/>
+    <circle class="thread-knot" cx="200" cy="90" r="3"/>
+    <circle class="seal-ring" cx="70" cy="58" r="30"/>
+    <text class="seal-glyph" x="70" y="68" text-anchor="middle">因</text>
+    <circle class="seal-ring" cx="330" cy="58" r="30"/>
+    <text class="seal-glyph" x="330" y="68" text-anchor="middle">緣</text>
+  </svg>
+
+  <a href="#form-card" class="btn">우리 궁합 보기</a>
+</div>
+
+<main class="content">
+  <section class="block" id="form-card">
+    <span class="overline">STEP ONE</span>
+    <h2>두 사람의 생년월일시</h2>
+    <p class="lede">시간이 가물가물하면 '시간 모름'을 눌러도 괜찮아요. 성별은 대운의 방향을 정확히 계산하기 위해 필요합니다.</p>
+
+    <form id="saju-form">
+      <div class="persons">
+        <div class="person">
+          <p class="person-label overline" style="font-style:normal;">그대</p>
+          <div class="field">
+            <label for="f-name-a">이름 (선택)</label>
+            <input type="text" id="f-name-a" maxlength="12" placeholder="뭐라고 부를까요">
+          </div>
+          <div class="field">
+            <label for="f-calendar-a">양력 / 음력</label>
+            <select id="f-calendar-a">
+              <option value="solar">양력</option>
+              <option value="lunar">음력</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-date-a">생년월일</label>
+            <input type="date" id="f-date-a" required min="1900-01-01" max="2026-12-31" value="1996-03-14">
+          </div>
+          <div class="field">
+            <label for="f-time-a">태어난 시간</label>
+            <input type="time" id="f-time-a" value="09:10">
+            <span class="check-row"><label><input type="checkbox" id="f-time-unknown-a"> 시간 모름</label></span>
+          </div>
+          <div class="field" id="leap-field-a" style="display:none;">
+            <label>윤달 여부</label>
+            <span class="check-row"><label><input type="checkbox" id="f-leap-a"> 이 달은 윤달이에요</label></span>
+          </div>
+          <div class="field">
+            <label>성별</label>
+            <span class="radio-row">
+              <label><input type="radio" name="f-gender-a" value="여" checked> 여자</label>
+              <label><input type="radio" name="f-gender-a" value="남"> 남자</label>
+            </span>
+          </div>
+        </div>
+
+        <div class="person">
+          <p class="person-label overline" style="font-style:normal;">그 사람</p>
+          <div class="field">
+            <label for="f-name-b">이름 (선택)</label>
+            <input type="text" id="f-name-b" maxlength="12" placeholder="뭐라고 부를까요">
+          </div>
+          <div class="field">
+            <label for="f-calendar-b">양력 / 음력</label>
+            <select id="f-calendar-b">
+              <option value="solar">양력</option>
+              <option value="lunar">음력</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-date-b">생년월일</label>
+            <input type="date" id="f-date-b" required min="1900-01-01" max="2026-12-31" value="1994-11-02">
+          </div>
+          <div class="field">
+            <label for="f-time-b">태어난 시간</label>
+            <input type="time" id="f-time-b" value="21:40">
+            <span class="check-row"><label><input type="checkbox" id="f-time-unknown-b"> 시간 모름</label></span>
+          </div>
+          <div class="field" id="leap-field-b" style="display:none;">
+            <label>윤달 여부</label>
+            <span class="check-row"><label><input type="checkbox" id="f-leap-b"> 이 달은 윤달이에요</label></span>
+          </div>
+          <div class="field">
+            <label>성별</label>
+            <span class="radio-row">
+              <label><input type="radio" name="f-gender-b" value="여"> 여자</label>
+              <label><input type="radio" name="f-gender-b" value="남" checked> 남자</label>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn" id="submit-btn">우리 궁합 보기</button>
+        <span class="form-msg" id="form-msg" role="status"></span>
+      </div>
+    </form>
+  </section>
+
+  <div id="results">
+    <section class="block">
+      <span class="overline">STEP TWO</span>
+      <h2>두 사람의 자리</h2>
+      <div class="profile-pair" id="profile-pair"></div>
+    </section>
+
+    <section class="block compat-card" id="compat-card">
+      <span class="overline">OUR THREAD</span>
+      <h2 style="margin-bottom:20px;">우리의 궁합</h2>
+      <div id="compat-body"></div>
+    </section>
+
+    <details class="toggle" id="detail-a">
+      <summary>그대의 사주, 전부 자세히 보기</summary>
+      <div class="markdown-full" id="markdown-a"></div>
+    </details>
+    <details class="toggle" id="detail-b">
+      <summary>그 사람의 사주, 전부 자세히 보기</summary>
+      <div class="markdown-full" id="markdown-b"></div>
+    </details>
+
+    <div class="again-row">
+      <button type="button" class="btn btn-ghost" id="again-btn">다른 두 사람으로 다시 보기</button>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <p>이 사이트의 사주 풀이는 <a href="https://github.com/golbin/ssaju">ssaju</a> 라이브러리의 만세력 계산을 바탕으로 하며, 궁합 해석은 오행 상생상극 이론을 빌린 재미용 참고 자료입니다. 두 분의 관계는 두 분이 만들어가는 이야기가 가장 정확합니다.</p>
+</footer>
+
+<script type="module">
+  import { calculateSaju } from "https://cdn.jsdelivr.net/npm/ssaju@0.2.0/dist/index.mjs";
+
+  const form = document.getElementById("saju-form");
+  const formMsg = document.getElementById("form-msg");
+  const submitBtn = document.getElementById("submit-btn");
+  const results = document.getElementById("results");
+  const profilePair = document.getElementById("profile-pair");
+  const compatBody = document.getElementById("compat-body");
+  const markdownA = document.getElementById("markdown-a");
+  const markdownB = document.getElementById("markdown-b");
+  const detailA = document.getElementById("detail-a");
+  const detailB = document.getElementById("detail-b");
+  const againBtn = document.getElementById("again-btn");
+
+  ["a", "b"].forEach((suffix) => {
+    const calendarSel = document.getElementById(`f-calendar-${suffix}`);
+    const leapField = document.getElementById(`leap-field-${suffix}`);
+    const timeInput = document.getElementById(`f-time-${suffix}`);
+    const timeUnknown = document.getElementById(`f-time-unknown-${suffix}`);
+    calendarSel.addEventListener("change", () => {
+      leapField.style.display = calendarSel.value === "lunar" ? "flex" : "none";
+    });
+    timeUnknown.addEventListener("change", () => {
+      timeInput.disabled = timeUnknown.checked;
+    });
+  });
+
+  const ELEMENT_HANJA = { "목": "木", "화": "火", "토": "土", "금": "金", "수": "水" };
+  const GENERATING = { "목": "화", "화": "토", "토": "금", "금": "수", "수": "목" };
+  const OVERCOMING = { "목": "토", "토": "수", "수": "화", "화": "금", "금": "목" };
+  const GEN_VERB = {
+    "목": "나무가 불씨를 지피듯",
+    "화": "타고 남은 재가 흙을 기름지게 하듯",
+    "토": "흙 속에서 쇠가 여물듯",
+    "금": "쇠끝에 맺힌 이슬이 물이 되듯",
+    "수": "물이 나무 뿌리를 키우듯",
+  };
+  const OVER_VERB = {
+    "목": "뿌리가 흙을 뚫고 들어가듯",
+    "토": "둑이 되어 물줄기를 막아서듯",
+    "수": "물이 불길을 꺼트리듯",
+    "화": "불이 쇠를 녹여내듯",
+    "금": "날이 나무를 베어내듯",
+  };
+  const STEM_HANJA_ELEMENT = {
+    "甲": "목", "乙": "목", "丙": "화", "丁": "화", "戊": "토",
+    "己": "토", "庚": "금", "辛": "금", "壬": "수", "癸": "수",
+  };
+
+  function parseCompact(text) {
+    const lines = text.split("\n");
+    const out = { meta: null, ilgan: null };
+
+    const metaLine = lines.find((l) => /^\d{4}\.\d{2}\.\d{2}\s/.test(l));
+    if (metaLine) {
+      const m = metaLine.match(
+        /^(\d{4})\.(\d{2})\.(\d{2})\s+(\d{2}:\d{2})\s+(남|여)\s+(양력|음력)\s+(\S+)\s+만\s*(\d+)세/
+      );
+      if (m) {
+        out.meta = { year: m[1], month: m[2], day: m[3], time: m[4], gender: m[5], calendar: m[6], tz: m[7], age: m[8] };
+      }
+    }
+
+    const ilganLine = lines.find((l) => l.startsWith("일간 "));
+    if (ilganLine) {
+      const m = ilganLine.match(
+        /^일간\s+(\S)\((\S+)\)(\S)([+-])\s+강약:\s*(\S+?)\((\d+)\)\s+격:\s*(\S+)\s+용신:\s*(.+)$/
+      );
+      if (m) {
+        out.ilgan = {
+          hanja: m[1], hangul: m[2], element: m[3], polarity: m[4],
+          strengthLabel: m[5], strengthScore: m[6], gyeokguk: m[7], yongsin: m[8].trim(),
+        };
+      }
+    }
+    return out;
+  }
+
+  function polarityWord(p) { return p === "+" ? "양(陽)" : "음(陰)"; }
+
+  function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function yongsinElements(yongsinStr) {
+    const set = new Set();
+    yongsinStr.split(",").forEach((s) => {
+      const ch = s.trim();
+      if (STEM_HANJA_ELEMENT[ch]) set.add(STEM_HANJA_ELEMENT[ch]);
+    });
+    return set;
+  }
+
+  function readPerson(suffix) {
+    const genderInput = document.querySelector(`input[name='f-gender-${suffix}']:checked`);
+    const dateVal = document.getElementById(`f-date-${suffix}`).value;
+    if (!genderInput || !dateVal) return null;
+
+    const [year, month, day] = dateVal.split("-").map(Number);
+    const timeInput = document.getElementById(`f-time-${suffix}`);
+    const timeUnknown = document.getElementById(`f-time-unknown-${suffix}`);
+    const calendarSel = document.getElementById(`f-calendar-${suffix}`);
+
+    const input = { year, month, day, gender: genderInput.value, calendar: calendarSel.value };
+    if (!timeUnknown.checked && timeInput.value) {
+      const [h, m] = timeInput.value.split(":").map(Number);
+      input.hour = h;
+      input.minute = m;
+    }
+    if (calendarSel.value === "lunar") {
+      input.leap = document.getElementById(`f-leap-${suffix}`).checked;
+    }
+
+    const name = escapeHtml(document.getElementById(`f-name-${suffix}`).value.trim());
+    return { input, name };
+  }
+
+  function renderProfile(container, label, name, parsed) {
+    const div = document.createElement("div");
+    div.className = "profile";
+    const title = name || label;
+    let rows = "";
+    if (parsed.meta) {
+      rows += `<div class="spec-row"><dt>생년월일</dt><dd>${parsed.meta.year}.${parsed.meta.month}.${parsed.meta.day} ${parsed.meta.calendar}</dd></div>`;
+      rows += `<div class="spec-row"><dt>만 나이</dt><dd>${parsed.meta.age}세</dd></div>`;
+    }
+    if (parsed.ilgan) {
+      const { hanja, hangul, element, polarity, strengthLabel, strengthScore, gyeokguk, yongsin } = parsed.ilgan;
+      rows += `<div class="spec-row"><dt>일간</dt><dd>${hanja}(${hangul}) · ${polarityWord(polarity)}</dd></div>`;
+      rows += `<div class="spec-row"><dt>강약</dt><dd>${strengthLabel}(${strengthScore})</dd></div>`;
+      rows += `<div class="spec-row"><dt>격</dt><dd>${gyeokguk}</dd></div>`;
+      rows += `<div class="spec-row"><dt>용신</dt><dd>${yongsin}</dd></div>`;
+    }
+    div.innerHTML = `<h3>${title}</h3>${rows}`;
+    container.appendChild(div);
+  }
+
+  function compatText(nameA, elA, nameB, elB) {
+    if (elA === elB) {
+      return { badge: "동기 · 同氣", text:
+        `${nameA}와 ${nameB}는 같은 ${elA}(${ELEMENT_HANJA[elA]}) 기운을 나눠 가졌어요. 말하지 않아도 통하는 부분이 많은 대신, 가끔은 서로에게서 스스로의 모습을 보는 듯한 기분이 들기도 해요.`
+      };
+    }
+    if (GENERATING[elA] === elB) {
+      return { badge: "상생 · 相生", text:
+        `${nameA}의 ${elA}(${ELEMENT_HANJA[elA]}) 기운이, ${GEN_VERB[elA]} ${nameB}의 ${elB}(${ELEMENT_HANJA[elB]}) 기운을 북돋아요. 곁에 있는 것만으로 서로가 편해지는, 은근히 잘 맞는 조합이에요.`
+      };
+    }
+    if (GENERATING[elB] === elA) {
+      return { badge: "상생 · 相生", text:
+        `${nameB}의 ${elB}(${ELEMENT_HANJA[elB]}) 기운이, ${GEN_VERB[elB]} ${nameA}의 ${elA}(${ELEMENT_HANJA[elA]}) 기운을 북돋아요. 곁에 있는 것만으로 서로가 편해지는, 은근히 잘 맞는 조합이에요.`
+      };
+    }
+    if (OVERCOMING[elA] === elB) {
+      return { badge: "상극 · 相剋", text:
+        `${nameA}의 ${elA}(${ELEMENT_HANJA[elA]}) 기운이, ${OVER_VERB[elA]} ${nameB}의 ${elB}(${ELEMENT_HANJA[elB]}) 기운과 정면으로 부딪혀요. 팽팽한 긴장감이 있지만, 그 긴장이 오히려 둘을 자라게 하는 짜릿한 자극이 되기도 해요.`
+      };
+    }
+    return { badge: "상극 · 相剋", text:
+      `${nameB}의 ${elB}(${ELEMENT_HANJA[elB]}) 기운이, ${OVER_VERB[elB]} ${nameA}의 ${elA}(${ELEMENT_HANJA[elA]}) 기운과 정면으로 부딪혀요. 팽팽한 긴장감이 있지만, 그 긴장이 오히려 둘을 자라게 하는 짜릿한 자극이 되기도 해요.`
+    };
+  }
+
+  function renderCompat(nameA, parsedA, nameB, parsedB) {
+    compatBody.innerHTML = "";
+    if (!parsedA.ilgan || !parsedB.ilgan) {
+      compatBody.innerHTML = `<div class="prose"><p>이번엔 두 분의 오행을 다 읽어오지 못했어요. 아래 '자세히 보기'에서 각자의 결과를 확인해주세요.</p></div>`;
+      return;
+    }
+    const elA = parsedA.ilgan.element;
+    const elB = parsedB.ilgan.element;
+    const { badge, text } = compatText(nameA, elA, nameB, elB);
+
+    const extras = [];
+    const yA = yongsinElements(parsedA.ilgan.yongsin);
+    const yB = yongsinElements(parsedB.ilgan.yongsin);
+    if (yA.has(elB)) extras.push(`게다가 ${nameB}가 가진 ${elB}(${ELEMENT_HANJA[elB]}) 기운은, ${nameA}에게 보약 같은 용신이에요.`);
+    if (yB.has(elA)) extras.push(`그리고 ${nameA}가 가진 ${elA}(${ELEMENT_HANJA[elA]}) 기운은, ${nameB}에게도 꼭 필요한 용신이고요.`);
+
+    let html = `<span class="compat-badge">${badge}</span><div class="prose"><p>${text}</p></div>`;
+    if (extras.length) {
+      html += `<div class="compat-extra prose">${extras.map((t) => `<p>${t}</p>`).join("")}</div>`;
+    }
+    compatBody.innerHTML = html;
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    formMsg.textContent = "";
+
+    const personA = readPerson("a");
+    const personB = readPerson("b");
+    if (!personA || !personB) {
+      formMsg.textContent = "두 분의 생년월일과 성별을 모두 입력해주세요.";
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "만세력 넘기는 중...";
+
+    try {
+      const resultA = calculateSaju(personA.input);
+      const resultB = calculateSaju(personB.input);
+      const compactA = resultA.toCompact();
+      const compactB = resultB.toCompact();
+      const parsedA = parseCompact(compactA);
+      const parsedB = parseCompact(compactB);
+
+      const nameA = personA.name || "그대";
+      const nameB = personB.name || "그 사람";
+
+      profilePair.innerHTML = "";
+      renderProfile(profilePair, "그대", personA.name, parsedA);
+      renderProfile(profilePair, "그 사람", personB.name, parsedB);
+
+      renderCompat(nameA, parsedA, nameB, parsedB);
+
+      markdownA.innerHTML = window.marked.parse(resultA.toMarkdown());
+      markdownB.innerHTML = window.marked.parse(resultB.toMarkdown());
+      detailA.querySelector("summary").textContent = `${nameA}의 사주, 전부 자세히 보기`;
+      detailB.querySelector("summary").textContent = `${nameB}의 사주, 전부 자세히 보기`;
+
+      results.classList.add("show");
+      results.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (err) {
+      console.error(err);
+      formMsg.textContent = "어라, 날짜를 다시 한번 확인해주시겠어요? 계산 중에 문제가 생겼어요.";
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "우리 궁합 보기";
+    }
+  });
+
+  againBtn.addEventListener("click", () => {
+    document.getElementById("form-card").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+</script>

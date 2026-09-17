@@ -1,0 +1,825 @@
+<title>공부 설계도</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --bg: #f2f6f4;
+    --surface: #ffffff;
+    --surface-2: #e9f1ee;
+    --ink: #1f2933;
+    --ink-soft: #52616b;
+    --border: rgba(31,41,51,0.13);
+    --accent: #1f7a6c;
+    --accent-soft: #dcefe9;
+    --accent-strong: #145b50;
+    --vacation: #c97a1f;
+    --vacation-soft: #f8e8d3;
+    --exam: #b3432f;
+    --exam-soft: #f6ddd7;
+    --shadow: rgba(20,40,35,0.14);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101715;
+      --surface: #182420;
+      --surface-2: #1e2d27;
+      --ink: #eaf2ef;
+      --ink-soft: #a9bab3;
+      --border: rgba(234,242,239,0.14);
+      --accent: #4fb39f;
+      --accent-soft: #1c3833;
+      --accent-strong: #7bd0bd;
+      --vacation: #e2a55c;
+      --vacation-soft: #3a2c1a;
+      --exam: #e08670;
+      --exam-soft: #3a2320;
+      --shadow: rgba(0,0,0,0.5);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101715;
+    --surface: #182420;
+    --surface-2: #1e2d27;
+    --ink: #eaf2ef;
+    --ink-soft: #a9bab3;
+    --border: rgba(234,242,239,0.14);
+    --accent: #4fb39f;
+    --accent-soft: #1c3833;
+    --accent-strong: #7bd0bd;
+    --vacation: #e2a55c;
+    --vacation-soft: #3a2c1a;
+    --exam: #e08670;
+    --exam-soft: #3a2320;
+    --shadow: rgba(0,0,0,0.5);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Sans KR", sans-serif;
+    line-height: 1.6;
+  }
+  h1, h2, h3 { font-family: "Gowun Batang", serif; font-weight: 700; margin: 0; text-wrap: balance; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 32px 20px 90px; }
+
+  header.top { margin-bottom: 28px; }
+  header.top .eyebrow {
+    display: block;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  header.top h1 { font-size: 1.7rem; }
+  header.top p { color: var(--ink-soft); font-size: 0.92rem; margin: 8px 0 0; max-width: 62ch; }
+
+  .profile-bar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .profile-bar label { font-size: 0.78rem; color: var(--ink-soft); }
+  .profile-bar select {
+    font-family: inherit;
+    font-size: 0.86rem;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+  .profile-bar .spacer { flex: 1; }
+  .profile-bar button {
+    font-family: inherit;
+    font-size: 0.82rem;
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .profile-bar button.danger { color: var(--exam); }
+
+  section.panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-top: 20px;
+    box-shadow: 0 10px 26px -20px var(--shadow);
+  }
+  section.panel h2 { font-size: 1.2rem; margin-bottom: 4px; }
+  section.panel .lede { color: var(--ink-soft); font-size: 0.86rem; margin: 4px 0 18px; max-width: 66ch; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+  .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  .field label { font-size: 0.8rem; font-weight: 600; color: var(--ink-soft); }
+  .field input[type="text"], .field input[type="number"], .field select {
+    font-family: inherit;
+    font-size: 0.94rem;
+    padding: 9px 11px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+  .field .hint { font-size: 0.74rem; color: var(--ink-soft); }
+
+  .mode-toggle { display: flex; gap: 8px; }
+  .mode-toggle button {
+    flex: 1;
+    font-family: inherit;
+    font-size: 0.86rem;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .mode-toggle button.active { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
+
+  .subject-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .subject-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px 7px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    font-size: 0.84rem;
+  }
+  .subject-chip.selected { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-strong); font-weight: 600; }
+  .subject-chip button.remove {
+    border: none; background: none; cursor: pointer; color: inherit; opacity: 0.6; font-size: 0.9rem; line-height: 1; padding: 0;
+  }
+  .subject-chip select {
+    font-family: inherit;
+    font-size: 0.76rem;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-weight: 600;
+  }
+  .add-subject-row { display: flex; gap: 8px; }
+  .add-subject-row input {
+    flex: 1;
+    font-family: inherit;
+    font-size: 0.86rem;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+  .add-subject-row button {
+    font-family: inherit;
+    font-size: 0.84rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .hours-summary { margin-top: 16px; }
+  .hours-row { display: grid; grid-template-columns: 90px 1fr 48px; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.84rem; }
+  .hours-track { height: 10px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+  .hours-fill { height: 100%; background: var(--accent); }
+
+  .generate-row { margin-top: 20px; text-align: center; }
+  button.primary {
+    font-family: inherit;
+    font-size: 0.96rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 999px;
+    padding: 13px 30px;
+    cursor: pointer;
+  }
+  button.primary:hover { background: var(--accent-strong); }
+
+  #roadmap { display: none; }
+  #roadmap.show { display: block; }
+
+  .month-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 8px; }
+  .month-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    background: var(--surface-2);
+  }
+  .month-card .month-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; }
+  .month-card .month-name { font-family: "Gowun Batang", serif; font-size: 1.15rem; font-weight: 700; }
+  .badge {
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+  }
+  .badge.vacation { background: var(--vacation-soft); color: var(--vacation); }
+  .badge.exam { background: var(--exam-soft); color: var(--exam); }
+  .month-card .phase-label { font-size: 0.76rem; color: var(--ink-soft); margin-bottom: 10px; }
+
+  .subject-block { margin-bottom: 10px; }
+  .subject-block:last-of-type { margin-bottom: 0; }
+  .subject-block .subj-name { font-size: 0.78rem; font-weight: 700; color: var(--accent-strong); margin-bottom: 3px; }
+  .subject-block textarea {
+    width: 100%;
+    min-height: 46px;
+    font-family: inherit;
+    font-size: 0.82rem;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 9px;
+    resize: vertical;
+  }
+
+  .week-check { display: flex; gap: 6px; margin-top: 12px; }
+  .week-check label {
+    flex: 1;
+    text-align: center;
+    font-size: 0.68rem;
+    color: var(--ink-soft);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 0;
+    cursor: pointer;
+    background: var(--surface);
+  }
+  .week-check input { display: none; }
+  .week-check input:checked + span { color: var(--accent-strong); font-weight: 700; }
+  .week-check label:has(input:checked) { background: var(--accent-soft); border-color: var(--accent); }
+
+  .ref-list { display: flex; flex-direction: column; gap: 10px; }
+  .ref-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    align-items: baseline;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .ref-item:hover { border-color: var(--accent); }
+  .ref-item .r-title { font-weight: 600; font-size: 0.9rem; }
+  .ref-item .r-desc { font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px; }
+  .ref-item .r-go { font-size: 0.78rem; color: var(--accent); white-space: nowrap; }
+
+  .disclaimer { font-size: 0.78rem; color: var(--ink-soft); margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); }
+
+  footer.site {
+    max-width: 980px; margin: 40px auto 0; padding: 18px 20px; border-top: 1px solid var(--border);
+    font-size: 0.76rem; color: var(--ink-soft); text-align: center;
+  }
+  footer.site a { color: inherit; }
+
+  @media print {
+    .profile-bar, section.panel:not(.print-plan), .generate-row, .no-print { display: none !important; }
+    body { background: #fff; color: #000; }
+    .month-card { break-inside: avoid; }
+  }
+
+  @media (max-width: 640px) {
+    .grid2 { grid-template-columns: 1fr; }
+    .profile-bar { flex-direction: column; align-items: stretch; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">STUDY BLUEPRINT</span>
+    <h1>공부 설계도</h1>
+    <p>학년·과목·주당 학습 시간을 넣으면 3월 신학기부터 다음 해 2월까지, 혹은 이번 달부터 12개월간의 학습 로드맵 뼈대를 자동으로 짜드려요. 각 칸은 자유롭게 고쳐 쓸 수 있고, 정확한 성취기준 원문은 아래 참고 데이터 링크에서 바로 확인할 수 있어요.</p>
+
+    <div class="profile-bar">
+      <label for="profile-select">저장된 플랜</label>
+      <select id="profile-select"></select>
+      <button type="button" id="save-btn">현재 내용 저장</button>
+      <button type="button" id="new-btn">새 플랜</button>
+      <button type="button" class="danger" id="delete-btn">삭제</button>
+      <span class="spacer"></span>
+      <button type="button" id="print-btn">인쇄 / PDF 저장</button>
+    </div>
+  </header>
+
+  <section class="panel">
+    <h2>1. 학습자 정보</h2>
+    <p class="lede">누구를 위한 계획인지, 어떤 기준으로 1년을 나눌지 정해주세요.</p>
+
+    <div class="grid2">
+      <div class="field">
+        <label for="p-name">이름 / 별명</label>
+        <input type="text" id="p-name" placeholder="예: 민지" maxlength="16">
+      </div>
+      <div class="field">
+        <label for="p-level">학년 구분</label>
+        <select id="p-level">
+          <option value="elem">초등학생</option>
+          <option value="middle">중학생</option>
+          <option value="high">고등학생</option>
+          <option value="etc">성인 / 기타</option>
+        </select>
+      </div>
+      <div class="field" style="grid-column:1/-1;">
+        <label for="p-goal">올해 목표 (한 줄로)</label>
+        <input type="text" id="p-goal" placeholder="예: 수학 내신 2등급 안착, 영어 회화 자신감 얻기">
+      </div>
+      <div class="field">
+        <label for="p-hours">주당 학습 가능 시간</label>
+        <input type="number" id="p-hours" min="1" max="80" value="14">
+        <span class="hint">과목별 배분 계산에 사용돼요.</span>
+      </div>
+      <div class="field">
+        <label>연간 기준</label>
+        <div class="mode-toggle">
+          <button type="button" data-mode="kr" id="mode-kr" class="active">한국 학사일정 (3월 시작)</button>
+          <button type="button" data-mode="cal" id="mode-cal">달력 연도 (이번 달 시작)</button>
+        </div>
+        <span class="hint">학사일정 기준은 학기·방학·시험 시기를 함께 표시해요.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>2. 과목 & 우선순위</h2>
+    <p class="lede">학년 구분에 맞는 과목이 아래 제시돼요. 클릭해서 선택하고, 각 과목 옆에서 비중(상/중/하)을 골라주세요. 목록에 없는 과목은 직접 추가할 수 있어요.</p>
+
+    <div class="subject-list" id="subject-list"></div>
+    <div class="add-subject-row">
+      <input type="text" id="new-subject-input" placeholder="과목 직접 추가 (예: 논술, 코딩)" maxlength="14">
+      <button type="button" id="add-subject-btn">추가</button>
+    </div>
+
+    <div class="hours-summary" id="hours-summary"></div>
+  </section>
+
+  <div class="generate-row">
+    <button type="button" class="primary" id="generate-btn">연간 로드맵 만들기</button>
+  </div>
+
+  <section class="panel print-plan" id="roadmap">
+    <h2>3. 연간 학습 로드맵</h2>
+    <p class="lede" id="roadmap-lede"></p>
+    <div class="month-grid" id="month-grid"></div>
+    <p class="disclaimer">학기·방학·시험 시기는 대부분의 학교 기준 일반적인 흐름이며, 실제 학사일정은 학교마다 다를 수 있어요. 각 칸의 문구는 출발점일 뿐이니 자유롭게 고쳐서 쓰세요.</p>
+  </section>
+
+  <section class="panel no-print">
+    <h2>참고 데이터 (data.edmgr.kr)</h2>
+    <p class="lede">교육부 교육데이터 활용·지원 서비스에서 실제로 검색되는 자료예요. 정확한 성취기준 원문이나 학원·방과후 정보가 필요할 때 확인해보세요.</p>
+    <div class="ref-list">
+      <a class="ref-item" href="https://ncic.re.kr" target="_blank" rel="noopener">
+        <span><span class="r-title">국가교육과정정보센터 (NCIC)</span><span class="r-desc">학교급·교과별 국가 교육과정 원문·해설서·성취기준을 직접 확인할 수 있는 공식 사이트예요.</span></span>
+        <span class="r-go">바로가기 ↗</span>
+      </a>
+      <a class="ref-item" href="https://data.edmgr.kr/totalsearch.do?qry=국가교육과정정보센터" target="_blank" rel="noopener">
+        <span><span class="r-title">국가교육과정정보센터 교육과정 원문 및 해설서</span><span class="r-desc">연도·차수·학교급·영역별 국가 교육과정 개정 원문 데이터셋이에요.</span></span>
+        <span class="r-go">데이터 보기 ↗</span>
+      </a>
+      <a class="ref-item" href="https://data.edmgr.kr/totalsearch.do?qry=학원 및 교습소" target="_blank" rel="noopener">
+        <span><span class="r-title">학원 및 교습소 현황</span><span class="r-desc">보충 학습이나 학원을 함께 고려할 때 지역별 학원·교습소 정보를 찾아볼 수 있어요.</span></span>
+        <span class="r-go">데이터 보기 ↗</span>
+      </a>
+      <a class="ref-item" href="https://data.edmgr.kr/totalsearch.do?qry=학업성취도" target="_blank" rel="noopener">
+        <span><span class="r-title">학업성취도 평가 통계</span><span class="r-desc">시·도별 학업성취수준 통계로, 목표 수준을 가늠하는 참고 자료로 쓸 수 있어요.</span></span>
+        <span class="r-go">데이터 보기 ↗</span>
+      </a>
+      <a class="ref-item" href="https://data.edmgr.kr/totalsearch.do?qry=학령인구" target="_blank" rel="noopener">
+        <span><span class="r-title">학령인구 통계</span><span class="r-desc">지역·연령별 학령인구 추이 데이터예요.</span></span>
+        <span class="r-go">데이터 보기 ↗</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="site">
+    <p>이 페이지는 <a href="https://data.edmgr.kr" target="_blank" rel="noopener">data.edmgr.kr(교육데이터 활용·지원 서비스)</a>의 공개 데이터셋을 참고 자료로 연결하는 개인용 연간 학습 계획 틀이에요. 저장한 내용은 이 브라우저에만 남아요.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  const STORAGE_KEY = "study-blueprint-v1";
+
+  const SCHOOL_LEVELS = {
+    elem: { label: "초등학생", subjects: ["국어", "수학", "사회", "과학", "영어", "예체능"] },
+    middle: { label: "중학생", subjects: ["국어", "수학", "영어", "사회", "과학", "정보"] },
+    high: { label: "고등학생", subjects: ["국어", "수학", "영어", "한국사", "사회탐구", "과학탐구"] },
+    etc: { label: "성인 / 기타", subjects: ["직무 역량", "자격증", "어학", "교양"] },
+  };
+
+  const PRIORITY_WEIGHT = { high: 3, mid: 2, low: 1 };
+  const PRIORITY_LABEL = { high: "상", mid: "중", low: "하" };
+
+  const KR_MONTHS = [
+    { m: "3월", phase: "new_term", state: "term" },
+    { m: "4월", phase: "midterm", state: "term", exam: true },
+    { m: "5월", phase: "deepen", state: "term" },
+    { m: "6월", phase: "final", state: "term", exam: true },
+    { m: "7월", phase: "wrap", state: "term" },
+    { m: "8월", phase: "vacation", state: "vacation" },
+    { m: "9월", phase: "new_term", state: "term" },
+    { m: "10월", phase: "midterm", state: "term", exam: true },
+    { m: "11월", phase: "deepen", state: "term" },
+    { m: "12월", phase: "final", state: "term", exam: true },
+    { m: "1월", phase: "vacation", state: "vacation" },
+    { m: "2월", phase: "prep_next", state: "vacation" },
+  ];
+
+  const CAL_PHASE_CYCLE = ["set_goal", "focus", "focus", "review"];
+  const MONTH_NAMES_KOR = ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"];
+
+  const PHASE_META = {
+    new_term: { label: "새 학기 적응", badge: null },
+    midterm: { label: "중간고사 대비", badge: "exam" },
+    deepen: { label: "진도 심화", badge: null },
+    final: { label: "기말고사 대비", badge: "exam" },
+    wrap: { label: "학기 마무리", badge: null },
+    vacation: { label: "방학 보충 / 선행", badge: "vacation" },
+    prep_next: { label: "새 학년 준비", badge: "vacation" },
+    set_goal: { label: "이번 분기 목표 설정", badge: null },
+    focus: { label: "집중 학습", badge: null },
+    review: { label: "점검 및 정리", badge: null },
+  };
+
+  function phaseText(phase, subject, priority) {
+    const base = {
+      new_term: `${subject} 새 학기 적응 — 지난 범위 핵심만 훑고 이번 학기 목차 파악하기`,
+      midterm: `${subject} 중간고사 대비 — 배운 범위 문제풀이 중심 복습`,
+      deepen: `${subject} 진도 심화 — 새 단원 학습 + 취약 유형 보완`,
+      final: `${subject} 기말고사 대비 — 학기 전체 범위 총정리`,
+      wrap: `${subject} 학기 마무리 — 오답노트 정리, 방학 계획 세우기`,
+      vacation: `${subject} 방학 보충/선행 — 부족한 단원 복습 또는 다음 학기 예습`,
+      prep_next: `${subject} 새 학년 준비 — 직전 학년 총정리 + 새 학년 개념 맛보기`,
+      set_goal: `${subject} 이번 분기 목표 정하고 학습 자료 점검하기`,
+      focus: `${subject} 집중 학습 기간 — 계획한 단원/자격 범위 진도 나가기`,
+      review: `${subject} 점검 및 정리 — 이번 분기 배운 내용 복습, 다음 분기 계획`,
+    }[phase] || `${subject} 학습`;
+    if (priority === "low") return base + " (가볍게 주 1~2회 유지)";
+    if (priority === "high") return base + " (주력 과목, 집중 배분)";
+    return base;
+  }
+
+  // ---------- state ----------
+  let state = defaultState();
+
+  function defaultState() {
+    return {
+      name: "",
+      level: "middle",
+      goal: "",
+      hours: 14,
+      calMode: "kr",
+      subjects: [], // {name, priority}
+      months: {}, // key: monthIndex -> {subjectTexts:{subj:text}, weeks:[bool,bool,bool,bool]}
+    };
+  }
+
+  function loadAll() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch (e) { return {}; }
+  }
+  function saveAll(all) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(all)); } catch (e) {}
+  }
+
+  // ---------- DOM refs ----------
+  const profileSelect = document.getElementById("profile-select");
+  const nameInput = document.getElementById("p-name");
+  const levelSelect = document.getElementById("p-level");
+  const goalInput = document.getElementById("p-goal");
+  const hoursInput = document.getElementById("p-hours");
+  const subjectListEl = document.getElementById("subject-list");
+  const newSubjectInput = document.getElementById("new-subject-input");
+  const hoursSummaryEl = document.getElementById("hours-summary");
+  const roadmapEl = document.getElementById("roadmap");
+  const roadmapLede = document.getElementById("roadmap-lede");
+  const monthGrid = document.getElementById("month-grid");
+  const modeKrBtn = document.getElementById("mode-kr");
+  const modeCalBtn = document.getElementById("mode-cal");
+
+  function escapeHtml(str) {
+    const d = document.createElement("div");
+    d.textContent = str == null ? "" : str;
+    return d.innerHTML;
+  }
+
+  // ---------- subjects UI ----------
+  function ensureDefaultSubjects() {
+    if (state.subjects.length) return;
+    state.subjects = SCHOOL_LEVELS[state.level].subjects.slice(0, 4).map((s) => ({ name: s, priority: "mid" }));
+  }
+
+  function renderSubjectPalette() {
+    subjectListEl.innerHTML = "";
+    const preset = SCHOOL_LEVELS[state.level].subjects;
+    const selectedNames = new Set(state.subjects.map((s) => s.name));
+
+    preset.forEach((name) => {
+      const selected = selectedNames.has(name);
+      const chip = document.createElement("div");
+      chip.className = "subject-chip" + (selected ? " selected" : "");
+      if (selected) {
+        const s = state.subjects.find((x) => x.name === name);
+        chip.innerHTML = `<span>${escapeHtml(name)}</span>`;
+        const sel = document.createElement("select");
+        ["high", "mid", "low"].forEach((p) => {
+          const opt = document.createElement("option");
+          opt.value = p; opt.textContent = PRIORITY_LABEL[p];
+          if (p === s.priority) opt.selected = true;
+          sel.appendChild(opt);
+        });
+        sel.addEventListener("change", () => { s.priority = sel.value; renderHoursSummary(); });
+        chip.appendChild(sel);
+        const rm = document.createElement("button");
+        rm.className = "remove"; rm.textContent = "×"; rm.type = "button";
+        rm.addEventListener("click", () => {
+          state.subjects = state.subjects.filter((x) => x.name !== name);
+          renderSubjectPalette(); renderHoursSummary();
+        });
+        chip.appendChild(rm);
+      } else {
+        chip.innerHTML = `<span>${escapeHtml(name)}</span>`;
+        chip.style.cursor = "pointer";
+        chip.addEventListener("click", () => {
+          state.subjects.push({ name, priority: "mid" });
+          renderSubjectPalette(); renderHoursSummary();
+        });
+      }
+      subjectListEl.appendChild(chip);
+    });
+
+    // custom subjects not in preset
+    state.subjects.filter((s) => !preset.includes(s.name)).forEach((s) => {
+      const chip = document.createElement("div");
+      chip.className = "subject-chip selected";
+      chip.innerHTML = `<span>${escapeHtml(s.name)}</span>`;
+      const sel = document.createElement("select");
+      ["high", "mid", "low"].forEach((p) => {
+        const opt = document.createElement("option");
+        opt.value = p; opt.textContent = PRIORITY_LABEL[p];
+        if (p === s.priority) opt.selected = true;
+        sel.appendChild(opt);
+      });
+      sel.addEventListener("change", () => { s.priority = sel.value; renderHoursSummary(); });
+      chip.appendChild(sel);
+      const rm = document.createElement("button");
+      rm.className = "remove"; rm.textContent = "×"; rm.type = "button";
+      rm.addEventListener("click", () => {
+        state.subjects = state.subjects.filter((x) => x.name !== s.name);
+        renderSubjectPalette(); renderHoursSummary();
+      });
+      chip.appendChild(rm);
+      subjectListEl.appendChild(chip);
+    });
+  }
+
+  function renderHoursSummary() {
+    const hours = Number(hoursInput.value) || 0;
+    const totalWeight = state.subjects.reduce((sum, s) => sum + PRIORITY_WEIGHT[s.priority], 0) || 1;
+    hoursSummaryEl.innerHTML = "<div class='field'><label>예상 주간 시간 배분</label></div>";
+    state.subjects.forEach((s) => {
+      const portion = (PRIORITY_WEIGHT[s.priority] / totalWeight) * hours;
+      const row = document.createElement("div");
+      row.className = "hours-row";
+      row.innerHTML = `
+        <span>${escapeHtml(s.name)}</span>
+        <span class="hours-track"><span class="hours-fill" style="width:${Math.min(100, (portion / (hours || 1)) * 100)}%"></span></span>
+        <span>${portion.toFixed(1)}h</span>
+      `;
+      hoursSummaryEl.appendChild(row);
+    });
+  }
+
+  document.getElementById("add-subject-btn").addEventListener("click", () => {
+    const v = newSubjectInput.value.trim();
+    if (!v) return;
+    if (!state.subjects.find((s) => s.name === v)) {
+      state.subjects.push({ name: v, priority: "mid" });
+      renderSubjectPalette(); renderHoursSummary();
+    }
+    newSubjectInput.value = "";
+  });
+  newSubjectInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { e.preventDefault(); document.getElementById("add-subject-btn").click(); }
+  });
+
+  levelSelect.addEventListener("change", () => {
+    state.level = levelSelect.value;
+    state.subjects = [];
+    ensureDefaultSubjects();
+    renderSubjectPalette();
+    renderHoursSummary();
+  });
+  hoursInput.addEventListener("input", renderHoursSummary);
+
+  modeKrBtn.addEventListener("click", () => setMode("kr"));
+  modeCalBtn.addEventListener("click", () => setMode("cal"));
+  function setMode(mode) {
+    state.calMode = mode;
+    modeKrBtn.classList.toggle("active", mode === "kr");
+    modeCalBtn.classList.toggle("active", mode === "cal");
+  }
+
+  // ---------- roadmap ----------
+  function buildMonthMeta() {
+    if (state.calMode === "kr") {
+      return KR_MONTHS.map((mo) => ({
+        label: mo.m,
+        phase: mo.phase,
+        state: mo.state,
+        exam: !!mo.exam,
+      }));
+    }
+    const now = new Date();
+    const startIdx = now.getMonth(); // 0-based, this month
+    return Array.from({ length: 12 }, (_, i) => {
+      const idx = (startIdx + i) % 12;
+      const phase = CAL_PHASE_CYCLE[i % CAL_PHASE_CYCLE.length];
+      return { label: MONTH_NAMES_KOR[idx], phase, state: "term", exam: false };
+    });
+  }
+
+  document.getElementById("generate-btn").addEventListener("click", () => {
+    state.name = nameInput.value.trim();
+    state.goal = goalInput.value.trim();
+    state.hours = Number(hoursInput.value) || 0;
+    if (!state.subjects.length) { ensureDefaultSubjects(); renderSubjectPalette(); }
+    renderRoadmap();
+    roadmapEl.classList.add("show");
+    roadmapEl.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  function renderRoadmap() {
+    const months = buildMonthMeta();
+    const who = state.name || "학습자";
+    roadmapLede.textContent = state.goal
+      ? `${who}님의 올해 목표 — “${state.goal}”. 아래 12개월 흐름을 참고해서 채워 넣어보세요.`
+      : `${who}님의 12개월 학습 흐름이에요. 각 칸을 직접 고쳐서 나만의 계획으로 다듬어보세요.`;
+
+    monthGrid.innerHTML = "";
+    months.forEach((mo, idx) => {
+      if (!state.months[idx]) state.months[idx] = { subjectTexts: {}, weeks: [false, false, false, false] };
+      const monthState = state.months[idx];
+
+      const card = document.createElement("div");
+      card.className = "month-card";
+
+      const meta = PHASE_META[mo.phase] || { label: "", badge: null };
+      let badgeHtml = "";
+      if (mo.state === "vacation") badgeHtml = `<span class="badge vacation">방학</span>`;
+      else if (mo.exam) badgeHtml = `<span class="badge exam">시험기간</span>`;
+      else badgeHtml = `<span class="badge">학기중</span>`;
+
+      let html = `
+        <div class="month-head">
+          <span class="month-name">${mo.label}</span>
+          ${state.calMode === "kr" ? badgeHtml : ""}
+        </div>
+        <div class="phase-label">${meta.label}</div>
+      `;
+
+      state.subjects.forEach((s) => {
+        const key = s.name;
+        if (monthState.subjectTexts[key] === undefined) {
+          monthState.subjectTexts[key] = phaseText(mo.phase, s.name, s.priority);
+        }
+        html += `
+          <div class="subject-block">
+            <div class="subj-name">${escapeHtml(s.name)}</div>
+            <textarea data-month="${idx}" data-subject="${escapeHtml(key)}">${escapeHtml(monthState.subjectTexts[key])}</textarea>
+          </div>
+        `;
+      });
+
+      html += `<div class="week-check">`;
+      for (let w = 0; w < 4; w++) {
+        const checked = monthState.weeks[w] ? "checked" : "";
+        html += `<label><input type="checkbox" data-month="${idx}" data-week="${w}" ${checked}><span>${w + 1}주</span></label>`;
+      }
+      html += `</div>`;
+
+      card.innerHTML = html;
+      monthGrid.appendChild(card);
+    });
+
+    monthGrid.querySelectorAll("textarea").forEach((ta) => {
+      ta.addEventListener("input", () => {
+        const idx = ta.dataset.month, subj = ta.dataset.subject;
+        state.months[idx].subjectTexts[subj] = ta.value;
+      });
+    });
+    monthGrid.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+      cb.addEventListener("change", () => {
+        const idx = cb.dataset.month, w = Number(cb.dataset.week);
+        state.months[idx].weeks[w] = cb.checked;
+      });
+    });
+  }
+
+  // ---------- profiles ----------
+  function refreshProfileSelect() {
+    const all = loadAll();
+    profileSelect.innerHTML = "";
+    const blank = document.createElement("option");
+    blank.value = ""; blank.textContent = "(새 플랜 - 저장 전)";
+    profileSelect.appendChild(blank);
+    const ids = Object.keys(all);
+    ids.forEach((id) => {
+      const opt = document.createElement("option");
+      opt.value = id;
+      opt.textContent = all[id].name || "(이름 없음)";
+      profileSelect.appendChild(opt);
+    });
+  }
+
+  function applyStateToForm() {
+    nameInput.value = state.name || "";
+    levelSelect.value = state.level;
+    goalInput.value = state.goal || "";
+    hoursInput.value = state.hours || 14;
+    setMode(state.calMode || "kr");
+    renderSubjectPalette();
+    renderHoursSummary();
+    roadmapEl.classList.remove("show");
+  }
+
+  document.getElementById("save-btn").addEventListener("click", () => {
+    state.name = nameInput.value.trim() || "이름없음";
+    state.goal = goalInput.value.trim();
+    state.hours = Number(hoursInput.value) || 0;
+    const all = loadAll();
+    const id = state._id || String(Date.now());
+    state._id = id;
+    all[id] = state;
+    saveAll(all);
+    refreshProfileSelect();
+    profileSelect.value = id;
+  });
+
+  document.getElementById("new-btn").addEventListener("click", () => {
+    state = defaultState();
+    ensureDefaultSubjects();
+    applyStateToForm();
+    profileSelect.value = "";
+  });
+
+  document.getElementById("delete-btn").addEventListener("click", () => {
+    const id = profileSelect.value;
+    if (!id) return;
+    const all = loadAll();
+    delete all[id];
+    saveAll(all);
+    refreshProfileSelect();
+    state = defaultState();
+    ensureDefaultSubjects();
+    applyStateToForm();
+  });
+
+  profileSelect.addEventListener("change", () => {
+    const id = profileSelect.value;
+    if (!id) return;
+    const all = loadAll();
+    if (!all[id]) return;
+    state = all[id];
+    state._id = id;
+    if (!state.months) state.months = {};
+    applyStateToForm();
+  });
+
+  document.getElementById("print-btn").addEventListener("click", () => {
+    if (!roadmapEl.classList.contains("show")) {
+      document.getElementById("generate-btn").click();
+    }
+    setTimeout(() => window.print(), 200);
+  });
+
+  // ---------- init ----------
+  ensureDefaultSubjects();
+  applyStateToForm();
+  refreshProfileSelect();
+})();
+</script>

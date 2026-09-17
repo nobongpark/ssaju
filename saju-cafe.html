@@ -1,0 +1,734 @@
+<title>설이의 사주카페</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+<style>
+  :root {
+    --bg: #f6f6f9;
+    --surface: #ffffff;
+    --surface-2: #eef1f8;
+    --ink: #21232b;
+    --ink-strong: #001f5f;
+    --muted: #5c5d66;
+    --border: #e0e2eb;
+    --navy: #001f5f;
+    --navy-dark: #081c45;
+    --navy-xdark: #091734;
+    --indigo: #3e67bb;
+    --indigo-tint: #e8edf9;
+    --teal: #0a6266;
+    --teal-fill: #10a5ac;
+    --teal-tint: #e3f3f2;
+    --yellow: #ffc836;
+    --yellow-dark: #b9822c;
+    --success: #256940;
+    --success-bg: #dbf0dc;
+    --shadow: rgba(9,23,52,0.14);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0c1024;
+      --surface: #141a34;
+      --surface-2: #1a2142;
+      --ink: #e9ecf6;
+      --ink-strong: #ffffff;
+      --muted: #a3aad0;
+      --border: rgba(233,236,246,0.14);
+      --indigo: #8fa8e6;
+      --indigo-tint: #1c2648;
+      --teal: #7fd8db;
+      --teal-fill: #2fb9bf;
+      --teal-tint: #113334;
+      --yellow: #ffc836;
+      --yellow-dark: #ffd76b;
+      --success: #6fce82;
+      --success-bg: #163524;
+      --shadow: rgba(0,0,0,0.55);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0c1024;
+    --surface: #141a34;
+    --surface-2: #1a2142;
+    --ink: #e9ecf6;
+    --ink-strong: #ffffff;
+    --muted: #a3aad0;
+    --border: rgba(233,236,246,0.14);
+    --indigo: #8fa8e6;
+    --indigo-tint: #1c2648;
+    --teal: #7fd8db;
+    --teal-fill: #2fb9bf;
+    --teal-tint: #113334;
+    --yellow: #ffc836;
+    --yellow-dark: #ffd76b;
+    --success: #6fce82;
+    --success-bg: #163524;
+    --shadow: rgba(0,0,0,0.55);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Sans KR", "Open Sans", -apple-system, "Apple SD Gothic Neo", sans-serif;
+    line-height: 1.6;
+  }
+  h1, h2, h3 { font-family: "Noto Sans KR", "Open Sans", sans-serif; text-wrap: balance; margin: 0; }
+  a { color: inherit; }
+
+  .eyebrow {
+    display: inline-block;
+    font-family: "Open Sans", "Noto Sans KR", sans-serif;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  /* ---- header ---- */
+  .topbar {
+    background: var(--navy-xdark);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brandmark { display: flex; align-items: center; gap: 10px; }
+  .brandmark .glyph {
+    width: 28px; height: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .brandmark .glyph span:nth-child(1) { background: var(--yellow); }
+  .brandmark .glyph span:nth-child(2) { background: var(--teal-fill); }
+  .brandmark .glyph span:nth-child(3) { background: var(--indigo); }
+  .brandmark .glyph span:nth-child(4) { background: #eef1f8; }
+  .brandmark .name { color: #fff; font-weight: 700; font-size: 1.02rem; }
+  .brandmark .name small { display: block; font-family: "Open Sans", sans-serif; font-size: 0.62rem; letter-spacing: 0.12em; color: #9db3e6; font-weight: 700; margin-top: 1px; }
+  .topbar .tag { color: #b9c5e8; font-size: 0.82rem; }
+  @media (max-width: 560px) { .topbar .tag { display: none; } }
+
+  /* ---- hero ---- */
+  .hero {
+    background: linear-gradient(155deg, var(--navy) 0%, var(--navy-xdark) 78%);
+    padding: 48px 24px 40px;
+  }
+  .hero-inner { max-width: 900px; margin: 0 auto; }
+  .hero .eyebrow { color: var(--yellow); margin-bottom: 12px; }
+  .hero h1 {
+    color: #fff;
+    font-size: clamp(1.8rem, 4.4vw, 2.75rem);
+    font-weight: 900;
+    letter-spacing: -0.01em;
+  }
+  .hero-sub { color: #cdd8f2; font-size: 1rem; max-width: 46ch; margin: 14px 0 0; }
+
+  .duo {
+    display: flex;
+    align-items: flex-end;
+    gap: 28px;
+    margin: 32px 0 30px;
+  }
+  .duo figure { margin: 0; flex: 0 0 auto; text-align: center; }
+  .duo figure svg { width: 132px; height: auto; display: block; }
+  .duo figcaption {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .duo figcaption em {
+    display: block;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.72rem;
+    color: #aebbe0;
+    margin-top: 1px;
+  }
+  .duo .fig-seol figcaption { color: var(--yellow); }
+  .duo .fig-jun figcaption { color: #7fd8db; }
+
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    border-radius: 4px;
+    padding: 12px 22px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn-primary { background: var(--yellow); color: #151b2e; }
+  .btn-primary:hover { background: #ffd968; }
+  .btn-ghost { background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.28); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.18); }
+
+  /* ---- content ---- */
+  .content { max-width: 900px; margin: 0 auto; padding: 36px 24px 70px; }
+
+  section.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+    box-shadow: 0 8px 24px -18px var(--shadow);
+  }
+  section.card + section.card, section.card + .again-row { margin-top: 20px; }
+  .card .eyebrow { color: var(--indigo); margin-bottom: 8px; }
+  .card h2 { font-size: 1.35rem; font-weight: 800; color: var(--ink-strong); }
+  .card .lede { color: var(--muted); font-size: 0.9rem; margin: 6px 0 22px; }
+
+  /* ---- form ---- */
+  .field-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 20px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field.span-2 { grid-column: 1 / -1; }
+  .field label { font-size: 0.82rem; color: var(--ink); font-weight: 700; }
+  .field .hint { font-size: 0.76rem; color: var(--muted); font-weight: 400; margin-top: -2px; }
+
+  input[type="date"], input[type="time"], input[type="text"], select {
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 12px;
+    accent-color: var(--indigo);
+  }
+  input:focus-visible, select:focus-visible, .btn:focus-visible, button:focus-visible, .toggle summary:focus-visible {
+    outline: 2px solid var(--indigo);
+    outline-offset: 2px;
+  }
+  .radio-row, .check-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .radio-row label, .check-row label {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.92rem; font-weight: 400; color: var(--ink);
+  }
+  input[type="radio"], input[type="checkbox"] { accent-color: var(--indigo); width: 16px; height: 16px; }
+
+  .submit-row { margin-top: 24px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  button.primary {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #151b2e;
+    background: var(--yellow);
+    border: none;
+    border-radius: 4px;
+    padding: 13px 26px;
+    cursor: pointer;
+  }
+  button.primary:hover { background: #ffd968; }
+  button.primary:active { transform: translateY(1px); }
+  button.primary:disabled { opacity: 0.55; cursor: progress; }
+  .form-msg { font-size: 0.84rem; color: #b42818; min-height: 1.2em; font-weight: 600; }
+
+  /* ---- results ---- */
+  #results { display: none; }
+  #results.show { display: block; }
+
+  .bubble-stack { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+  .bubble {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--indigo);
+    border-radius: 6px;
+    padding: 14px 18px;
+    max-width: 96%;
+  }
+  .bubble.jun { border-left-color: var(--teal-fill); }
+  .bubble-tag {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--indigo);
+    margin-bottom: 4px;
+  }
+  .bubble.jun .bubble-tag { color: var(--teal); }
+  .bubble p { margin: 0; font-size: 0.95rem; }
+  @media (prefers-reduced-motion: no-preference) {
+    .bubble { animation: rise 0.4s ease both; }
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  table.wonguk { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  table.wonguk th, table.wonguk td {
+    border: 1px solid var(--border);
+    padding: 9px 8px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  table.wonguk thead th {
+    background: var(--navy);
+    color: #fff;
+    font-weight: 700;
+  }
+  table.wonguk thead th.self-col { background: var(--navy-dark); color: var(--yellow); }
+  table.wonguk tbody th {
+    text-align: left;
+    background: var(--surface-2);
+    font-weight: 700;
+    color: var(--muted);
+    white-space: nowrap;
+    font-size: 0.8rem;
+  }
+  table.wonguk td.self-col { background: var(--indigo-tint); font-weight: 600; }
+  .table-scroll { overflow-x: auto; border-radius: 6px; }
+  .table-note { font-size: 0.78rem; color: var(--muted); margin-top: 10px; }
+
+  details.toggle { margin-top: 8px; }
+  details.toggle summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--teal);
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+  }
+  details.toggle summary::-webkit-details-marker { display: none; }
+  details.toggle summary::before { content: "▸"; transition: transform 0.15s ease; }
+  details.toggle[open] summary::before { transform: rotate(90deg); }
+  .markdown-full {
+    margin-top: 14px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+    font-size: 0.86rem;
+    color: var(--ink);
+  }
+  .markdown-full h2 { font-size: 1.02rem; margin: 18px 0 8px; font-weight: 800; color: var(--navy); }
+  :root[data-theme="dark"] .markdown-full h2 { color: var(--indigo); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .markdown-full h2 { color: var(--indigo); } }
+  .markdown-full h2:first-child { margin-top: 0; }
+  .markdown-full table { border-collapse: collapse; width: 100%; margin: 8px 0 4px; font-size: 0.82rem; }
+  .markdown-full th, .markdown-full td { border: 1px solid var(--border); padding: 6px 8px; text-align: center; font-variant-numeric: tabular-nums; }
+  .markdown-full th { background: var(--surface-2); }
+  .markdown-full .table-scroll { margin-bottom: 6px; }
+  .markdown-full code { background: var(--surface-2); border-radius: 3px; padding: 1px 5px; }
+  .markdown-full p { margin: 4px 0; }
+
+  .again-row { margin-top: 20px; text-align: center; }
+  button.ghost {
+    font-family: inherit;
+    font-size: 0.86rem;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 18px;
+    cursor: pointer;
+  }
+  button.ghost:hover { color: var(--ink); border-color: var(--teal-fill); }
+
+  footer {
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-align: center;
+  }
+  footer a { text-decoration: underline; }
+
+  @media (max-width: 560px) {
+    .field-grid { grid-template-columns: 1fr; }
+    .duo { gap: 18px; }
+    .duo figure svg { width: 104px; }
+  }
+</style>
+
+<div class="topbar">
+  <div class="brandmark">
+    <span class="glyph"><span></span><span></span><span></span><span></span></span>
+    <span class="name">설이의 사주카페<small>SEOL-I &amp; JUN · SAJU CAFÉ</small></span>
+  </div>
+  <div class="tag">만세력 기반 사주 풀이</div>
+</div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">SAJU, CALCULATED PROPERLY</span>
+    <h1>마음은 설이가, 숫자는 준이가.</h1>
+    <p class="hero-sub">생년월일시 하나면 준이는 실제 만세력으로 원국을 딱 맞게 뽑고, 설이는 그걸 사람 말로 풀어줘.</p>
+
+    <div class="duo">
+      <figure class="fig-seol">
+        <svg viewBox="0 0 168 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="설이 캐릭터 일러스트">
+          <circle cx="84" cy="95" r="82" fill="#132c66"/>
+          <path d="M30 190 C30 138 50 116 84 116 C118 116 138 138 138 190 Z" fill="#2c2440"/>
+          <path d="M40 184 C40 140 58 122 84 122 C110 122 128 140 128 184 Z" fill="#3a3050"/>
+          <path d="M56 128 C56 158 66 180 84 180 C102 180 112 158 112 128 C112 108 100 94 84 94 C68 94 56 108 56 128 Z" fill="#f2cba3"/>
+          <path d="M54 108 C54 82 68 66 84 66 C100 66 114 82 114 108 C114 92 106 80 84 80 C62 80 54 92 54 108 Z" fill="#2c2440"/>
+          <circle cx="84" cy="68" r="10" fill="#2c2440"/>
+          <rect x="90" y="56" width="2.6" height="20" rx="1.3" fill="#ffc836" transform="rotate(18 90 56)"/>
+          <path d="M70 132 q6 5 12 0" stroke="#5c4a3a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M86 132 q6 5 12 0" stroke="#5c4a3a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M76 150 q8 7 16 0" stroke="#a94f2b" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M40 190 C44 160 60 146 84 146 C108 146 124 160 128 190 Z" fill="#3e67bb"/>
+          <path d="M64 158 L84 144 L104 158 L98 190 L70 190 Z" fill="#eef1f8"/>
+          <ellipse cx="114" cy="176" rx="13" ry="8" fill="#eef1f8"/>
+          <path d="M101 172 C93 169 93 180 101 178" stroke="#eef1f8" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+        </svg>
+        <figcaption>설이<em>마음을 읽어요</em></figcaption>
+      </figure>
+      <figure class="fig-jun">
+        <svg viewBox="0 0 168 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="준 캐릭터 일러스트">
+          <circle cx="84" cy="95" r="82" fill="#0e3a3c"/>
+          <path d="M32 190 C32 140 52 118 84 118 C116 118 136 140 136 190 Z" fill="#1f2733"/>
+          <path d="M42 184 C42 142 60 124 84 124 C108 124 126 142 126 184 Z" fill="#2a3441"/>
+          <path d="M58 130 C58 158 68 178 84 178 C100 178 110 158 110 130 C110 110 99 96 84 96 C69 96 58 110 58 130 Z" fill="#eec295"/>
+          <path d="M56 106 C56 84 68 70 84 70 C100 70 112 84 112 106 C108 92 100 84 84 84 C72 84 62 90 56 106 Z" fill="#1f2733"/>
+          <path d="M70 134 q6 5 12 0" stroke="#4a3a2c" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M86 134 q6 5 12 0" stroke="#4a3a2c" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M78 152 q6 4 12 0" stroke="#9d5230" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M42 190 C46 162 60 148 84 148 C108 148 122 162 126 190 Z" fill="#10a5ac"/>
+          <path d="M70 152 L84 166 L98 152 L98 190 L70 190 Z" fill="#eef1f8"/>
+          <g>
+            <circle cx="120" cy="172" r="15" fill="#eef1f8" stroke="#0a6266" stroke-width="2"/>
+            <path d="M120 163 L124 174 L120 181 L116 174 Z" fill="#ffc836"/>
+          </g>
+        </svg>
+        <figcaption>준<em>숫자를 맞춰요</em></figcaption>
+      </figure>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="#form-card" class="btn btn-primary">내 사주 봐줘 🌙</a>
+      <a href="https://github.com/golbin/ssaju" class="btn btn-ghost">계산 엔진 보기</a>
+    </div>
+  </div>
+</section>
+
+<main class="content">
+  <section class="card" id="form-card">
+    <span class="eyebrow">STEP 1 · 손님 정보</span>
+    <h2>생년월일시 알려주기</h2>
+    <p class="lede">준이가 정확히 계산할 수 있게 태어난 날짜와 시간을 알려줘. 시간이 가물가물하면 체크박스만 눌러도 돼.</p>
+
+    <form id="saju-form">
+      <div class="field-grid">
+        <div class="field">
+          <label for="f-name">이름 (선택)</label>
+          <input type="text" id="f-name" maxlength="12" placeholder="뭐라고 부를까?">
+        </div>
+        <div class="field">
+          <label for="f-calendar">양력 / 음력</label>
+          <select id="f-calendar">
+            <option value="solar">양력</option>
+            <option value="lunar">음력</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="f-date">생년월일</label>
+          <input type="date" id="f-date" required min="1900-01-01" max="2026-12-31" value="1998-05-17">
+        </div>
+        <div class="field">
+          <label for="f-time">태어난 시간</label>
+          <input type="time" id="f-time" value="14:20">
+          <span class="check-row">
+            <label><input type="checkbox" id="f-time-unknown"> 시간 모름</label>
+          </span>
+        </div>
+
+        <div class="field span-2" id="leap-field" style="display:none;">
+          <label>윤달 여부</label>
+          <span class="check-row">
+            <label><input type="checkbox" id="f-leap"> 이 달은 윤달이에요</label>
+          </span>
+        </div>
+
+        <div class="field span-2">
+          <label>성별</label>
+          <span class="radio-row">
+            <label><input type="radio" name="f-gender" value="여" checked> 여자</label>
+            <label><input type="radio" name="f-gender" value="남"> 남자</label>
+          </span>
+          <span class="hint">대운이 흘러가는 방향을 정하는 데 필요해서 물어보는 거야.</span>
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="primary" id="submit-btn">내 사주 봐줘 🌙</button>
+        <span class="form-msg" id="form-msg" role="status"></span>
+      </div>
+    </form>
+  </section>
+
+  <div id="results">
+    <section class="card">
+      <span class="eyebrow">STEP 2 · 설이 &amp; 준의 풀이</span>
+      <h2>둘이 봐준 결과</h2>
+      <p class="lede">준이가 계산하고, 설이가 풀어줬어. 번갈아 읽어봐.</p>
+      <div class="bubble-stack" id="bubble-stack"></div>
+    </section>
+
+    <section class="card">
+      <span class="eyebrow" style="color:var(--teal);">원국표</span>
+      <h2>사주 네 기둥</h2>
+      <p class="lede">시주 · 일주 · 월주 · 연주. 노란 글씨로 표시된 <strong>일주</strong>가 손님 자신을 나타내는 기둥이야.</p>
+      <div class="table-scroll">
+        <table class="wonguk" id="wonguk-table"></table>
+      </div>
+      <p class="table-note" id="wonguk-note"></p>
+
+      <details class="toggle">
+        <summary>대운 · 세운 · 신살까지 전부 자세히 보기</summary>
+        <div class="markdown-full" id="markdown-full"></div>
+      </details>
+    </section>
+
+    <div class="again-row">
+      <button type="button" class="ghost" id="again-btn">다른 사주 다시 보기</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>이 사이트의 사주 풀이는 <a href="https://github.com/golbin/ssaju">ssaju</a> 라이브러리의 만세력 계산 결과를 바탕으로 하되, 해석은 재미로 읽는 참고용이에요. 중요한 결정은 본인의 판단을 따르세요.</p>
+  </footer>
+</main>
+
+<script type="module">
+  import { calculateSaju } from "https://cdn.jsdelivr.net/npm/ssaju@0.2.0/dist/index.mjs";
+
+  const form = document.getElementById("saju-form");
+  const calendarSel = document.getElementById("f-calendar");
+  const leapField = document.getElementById("leap-field");
+  const timeInput = document.getElementById("f-time");
+  const timeUnknown = document.getElementById("f-time-unknown");
+  const formMsg = document.getElementById("form-msg");
+  const submitBtn = document.getElementById("submit-btn");
+  const results = document.getElementById("results");
+  const bubbleStack = document.getElementById("bubble-stack");
+  const wonggukTable = document.getElementById("wonguk-table");
+  const wonggukNote = document.getElementById("wonguk-note");
+  const markdownFull = document.getElementById("markdown-full");
+  const againBtn = document.getElementById("again-btn");
+
+  calendarSel.addEventListener("change", () => {
+    leapField.style.display = calendarSel.value === "lunar" ? "flex" : "none";
+  });
+  timeUnknown.addEventListener("change", () => {
+    timeInput.disabled = timeUnknown.checked;
+  });
+
+  const ELEMENT_FLAVOR = {
+    "목": "쭉쭉 뻗어나가는 나무(木) 기운 — 시작하는 힘과 곧은 결단력",
+    "화": "타오르는 불(火) 기운 — 열정과 표현력, 주변을 밝히는 온기",
+    "토": "든든한 흙(土) 기운 — 무게 중심을 잡아주는 신뢰와 포용력",
+    "금": "단단한 쇠(金) 기운 — 원칙과 결단력, 맺고 끊는 힘",
+    "수": "흐르는 물(水) 기운 — 지혜와 융통성, 상황을 읽는 감각",
+  };
+  const ROW_LABELS = {
+    "干": "천간",
+    "支": "지지",
+    "장간": "지장간",
+    "干성": "천간 십성",
+    "支성": "지지 십성",
+    "봉12": "12운성",
+    "거12": "12운성 (거)",
+    "12살": "12신살",
+    "특살": "특수신살",
+  };
+  const COL_LABELS = ["시주", "일주", "월주", "연주"];
+
+  function parseCompact(text) {
+    const lines = text.split("\n");
+    const out = { meta: null, ilgan: null, wonguk: [] };
+
+    const metaLine = lines.find((l) => /^\d{4}\.\d{2}\.\d{2}\s/.test(l));
+    if (metaLine) {
+      const m = metaLine.match(
+        /^(\d{4})\.(\d{2})\.(\d{2})\s+(\d{2}:\d{2})\s+(남|여)\s+(양력|음력)\s+(\S+)\s+만\s*(\d+)세/
+      );
+      if (m) {
+        out.meta = {
+          year: m[1], month: m[2], day: m[3], time: m[4],
+          gender: m[5], calendar: m[6], tz: m[7], age: m[8],
+        };
+      }
+    }
+
+    const ilganLine = lines.find((l) => l.startsWith("일간 "));
+    if (ilganLine) {
+      const m = ilganLine.match(
+        /^일간\s+(\S)\((\S+)\)(\S)([+-])\s+강약:\s*(\S+?)\((\d+)\)\s+격:\s*(\S+)\s+용신:\s*(.+)$/
+      );
+      if (m) {
+        out.ilgan = {
+          hanja: m[1], hangul: m[2], element: m[3], polarity: m[4],
+          strengthLabel: m[5], strengthScore: m[6], gyeokguk: m[7], yongsin: m[8].trim(),
+        };
+      }
+    }
+
+    for (const line of lines) {
+      const sp = line.indexOf(" ");
+      if (sp === -1) continue;
+      const label = line.slice(0, sp);
+      if (!(label in ROW_LABELS)) continue;
+      const cells = line.slice(sp + 1).split("|").map((c) => c.trim());
+      if (cells.length === 4) {
+        out.wonguk.push({ label: ROW_LABELS[label], cells });
+      }
+    }
+    return out;
+  }
+
+  function polarityWord(p) {
+    return p === "+" ? "양(陽)" : "음(陰)";
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function buildBubbles(parsed, name) {
+    const safeName = escapeHtml(name);
+    const who = safeName ? `${safeName}야` : "손님";
+    const out = [];
+
+    if (parsed.meta) {
+      const { year, month, day, gender, calendar, age } = parsed.meta;
+      out.push({ speaker: "jun", text:
+        `${who}, ${year}년 ${Number(month)}월 ${Number(day)}일 ${calendar} 태생 ${gender}자 손님이시네요. 만세력으로 맞춰보니 지금 만 ${age}세시고요.`
+      });
+    } else {
+      out.push({ speaker: "jun", text: `${who}, 생년월일 잘 받았어요. 계산부터 돌려볼게요.` });
+    }
+
+    if (parsed.ilgan) {
+      const { hanja, hangul, element, polarity, strengthLabel, strengthScore, gyeokguk, yongsin } = parsed.ilgan;
+      const flavor = ELEMENT_FLAVOR[element] || `${element} 기운`;
+      out.push({ speaker: "jun", text:
+        `일간(日干)은 <strong>${hanja}(${hangul})</strong>, ${polarityWord(polarity)} ${element} 기운이에요. 사주 강약은 <strong>${strengthLabel}(${strengthScore}점)</strong>, 격은 <strong>${gyeokguk}</strong>으로 나왔습니다.`
+      });
+      out.push({ speaker: "seol", text:
+        `준이가 뽑아준 거 보니까 ${who} ${flavor}을 타고났나 봐. 이런 사람 옆에 있으면 은근히 든든해.`
+      });
+      out.push({ speaker: "seol", text:
+        `그리고 너한테 보약처럼 필요한 기운은 <strong>${yongsin}</strong>이야. 색이나 방향, 곁에 두는 사람 고를 때 이 기운을 챙겨주면 균형이 맞아.`
+      });
+    } else {
+      out.push({ speaker: "seol", text: `오행 짜임새까지는 이번에 정확히 못 읽었지만, 아래 원국표에서 직접 확인해봐.` });
+    }
+
+    out.push({ speaker: "jun", text: `원국표는 정리해서 아래에 띄워놨어요. 노란 칸이 본인 자신인 일주예요.` });
+    return out;
+  }
+
+  function renderBubbles(items) {
+    bubbleStack.innerHTML = "";
+    items.forEach((item, i) => {
+      const div = document.createElement("div");
+      div.className = "bubble" + (item.speaker === "jun" ? " jun" : "");
+      div.style.animationDelay = `${i * 0.08}s`;
+      const tag = item.speaker === "jun" ? "준" : "설이";
+      div.innerHTML = `<span class="bubble-tag">${tag}</span><p>${item.text}</p>`;
+      bubbleStack.appendChild(div);
+    });
+  }
+
+  function renderWonguk(parsed) {
+    if (!parsed.wonguk.length) {
+      wonggukTable.innerHTML = "";
+      wonggukNote.textContent = "원국표를 이번엔 읽어오지 못했어. 아래 '자세히 보기'에서 전체 결과를 확인해줘.";
+      return;
+    }
+    let html = "<thead><tr><th></th>";
+    COL_LABELS.forEach((c, i) => {
+      html += `<th class="${i === 1 ? "self-col" : ""}">${c}</th>`;
+    });
+    html += "</tr></thead><tbody>";
+    parsed.wonguk.forEach((row) => {
+      html += `<tr><th>${row.label}</th>`;
+      row.cells.forEach((cell, i) => {
+        const text = cell === "(일간)" ? "나" : cell;
+        html += `<td class="${i === 1 ? "self-col" : ""}">${text}</td>`;
+      });
+      html += "</tr>";
+    });
+    html += "</tbody>";
+    wonggukTable.innerHTML = html;
+    wonggukNote.textContent = "";
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    formMsg.textContent = "";
+
+    const genderInput = form.querySelector("input[name='f-gender']:checked");
+    if (!genderInput) {
+      formMsg.textContent = "성별을 선택해줘.";
+      return;
+    }
+    const dateVal = document.getElementById("f-date").value;
+    if (!dateVal) {
+      formMsg.textContent = "생년월일을 입력해줘.";
+      return;
+    }
+    const [year, month, day] = dateVal.split("-").map(Number);
+
+    let hour, minute;
+    if (!timeUnknown.checked && timeInput.value) {
+      const [h, m] = timeInput.value.split(":").map(Number);
+      hour = h;
+      minute = m;
+    }
+
+    const input = {
+      year, month, day,
+      gender: genderInput.value,
+      calendar: calendarSel.value,
+    };
+    if (hour !== undefined) { input.hour = hour; input.minute = minute; }
+    if (calendarSel.value === "lunar") {
+      input.leap = document.getElementById("f-leap").checked;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "만세력 넘기는 중...";
+
+    try {
+      const result = calculateSaju(input);
+      const compact = result.toCompact();
+      const markdown = result.toMarkdown();
+      const parsed = parseCompact(compact);
+      const name = document.getElementById("f-name").value.trim();
+
+      renderBubbles(buildBubbles(parsed, name));
+      renderWonguk(parsed);
+      markdownFull.innerHTML = window.marked.parse(markdown);
+
+      results.classList.add("show");
+      results.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (err) {
+      console.error(err);
+      formMsg.textContent = "어라, 날짜를 다시 한번 확인해줄래? 계산 중에 문제가 생겼어.";
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "내 사주 봐줘 🌙";
+    }
+  });
+
+  againBtn.addEventListener("click", () => {
+    document.getElementById("form-card").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+</script>
